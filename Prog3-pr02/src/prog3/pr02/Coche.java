@@ -12,7 +12,12 @@ public class Coche {
 	protected String piloto;  // Nombre de piloto
 	
 	// Constructores
-	
+	static  double masa=1;
+	static   double fuerzabaseadelante=2000;
+	static   double fuerzabaseatras=1000;
+	static   double coefaire =0.35;
+    static   double coefsuelo= 15.5;
+    
 	public Coche() {
 		miVelocidad = 0;
 		miDireccionActual = 0;
@@ -30,8 +35,45 @@ public class Coche {
 	/** Cambia la velocidad actual del coche
 	 * @param miVelocidad
 	 */
+	
 	public void setVelocidad( double miVelocidad ) {
 		this.miVelocidad = miVelocidad;
+	}
+
+	public double getMiVelocidad() {
+		return miVelocidad;
+	}
+
+	public void setMiVelocidad(double miVelocidad) {
+		this.miVelocidad = miVelocidad;
+	}
+
+	public double getMiDireccionActual() {
+		return miDireccionActual;
+	}
+
+	public void setMiDireccionActual(double miDireccionActual) {
+		this.miDireccionActual = miDireccionActual;
+	}
+
+	public static double getMasa() {
+		return masa;
+	}
+
+	public static double getFuerzabaseadelante() {
+		return fuerzabaseadelante;
+	}
+
+	public static double getFuerzabaseatras() {
+		return fuerzabaseatras;
+	}
+
+	public static double getCoefaire() {
+		return coefaire;
+	}
+
+	public static double getCoefsuelo() {
+		return coefsuelo;
 	}
 
 	public double getDireccionActual() {
@@ -103,4 +145,29 @@ public class Coche {
 		return piloto + " (" + posX + "," + posY + ") - " +
 			   "Velocidad: " + miVelocidad + " ## Dirección: " + miDireccionActual; 
 	}
+	
+	public double fuerzaAceleracionAdelante() {
+		if (miVelocidad<=-150) return fuerzabaseadelante;
+		else if (miVelocidad<=0)
+		return fuerzabaseadelante*(-miVelocidad/150*0.5+0.5);
+		else if (miVelocidad<=250)
+		return fuerzabaseadelante*(miVelocidad/250*0.5+0.5);
+		else if (miVelocidad<=750)
+		return fuerzabaseadelante;
+		else return fuerzabaseadelante*(-(miVelocidad-1000)/250);
+		}
+	
+
+
+	public double fuerzaAceleracionAtras() {
+		if (miVelocidad<=-150) return fuerzabaseatras;
+		else if (miVelocidad<=0)
+		return fuerzabaseatras*(-miVelocidad/150*0.2+0.3);
+		else if (miVelocidad<=250)
+		return fuerzabaseatras*(miVelocidad/250*0.55+0.3);
+		else if (miVelocidad<=750)
+		return fuerzabaseatras;
+		else return fuerzabaseatras;
+	}
 }
+
